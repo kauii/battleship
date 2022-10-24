@@ -43,17 +43,17 @@ public class BattleShips {
 
     public static void createOceanMap(){
         //First section of Ocean Map
-        System.out.print("  ");
+        System.out.print("  |");
         for(int i = 0; i < numCols; i++)
-                System.out.print(i);
+                System.out.print(i+"|");
         System.out.println();
 
         //Middle section of Ocean Map
         for(int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
-                grid[i][j] = " ";
+                grid[i][j] = "| ";
                 if (j == 0)
-                    System.out.print(i + "|" + grid[i][j]);
+                    System.out.print(i + " " + grid[i][j]);
                 else if (j == grid[i].length - 1)
                     System.out.print(grid[i][j] + "|" + i);
                 else
