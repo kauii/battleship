@@ -2,3 +2,7 @@
 # folders
 .settings
 bin
+.classpath
+.project
+.idea
+battleship.iml
