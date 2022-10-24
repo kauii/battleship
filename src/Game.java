@@ -1,5 +1,9 @@
 public class Game {
-    public void print(){
+
+    public Game(){
+
         System.out.println("Hello World");
+
     }
+
 }
