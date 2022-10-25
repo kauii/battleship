@@ -1,4 +1,4 @@
 package game;
 
-public interface Player {
+public class Player {
 }
