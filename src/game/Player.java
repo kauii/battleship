@@ -5,4 +5,13 @@ public class Player {
     public void initBoard(){
 
     }
+
+    public void attack(){
+
+    }
+
+    public void validateMove(char x, int y) {
+
+    }
+
 }
