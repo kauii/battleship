@@ -61,9 +61,19 @@ public class Game {
     }
 
     private void fight() {
+// hasHit(boolean true/false) checkAttack(int position) attack()
+        int i = player1.attack();
+        int j = player2.attack();
+        int x = player2.checkAttack(i);
+        if (x>0){
+            player1.hasHit(true);
+            if (player2.fleet.boats[x.substring(0,1)][x.substring(1,2)].isSunk()) {
+                player1.hassunk(player2.fleet.boats[x.substring(0,1)][x.substring(1,2)].getBoat());
+            }
+        }
 
-        player1.attack();
-        player2.attack();
+        player2.hasHit(player1.checkAttack(player2.attack()));
+
 
         // print Gameboard
         //printBoard();

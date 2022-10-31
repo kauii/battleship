@@ -2,11 +2,21 @@ package game;
 import java.util.Scanner;
 
 public class User extends Player {
+    // User creates fleet
+
+    Board Board;
+
+    public void initBoard() {
+        System.out.println("Deploy your ships!");
+
+    }
+
     public User(Board boardUser,Board boardTarget){
     	
     }
 
-    public void attack() {
+    @Override
+    public int attack() {
         Scanner input = new Scanner(System.in);
 
         //input for x-coordinate (char A-J)
@@ -24,5 +34,9 @@ public class User extends Player {
             System.out.println("Invalid input.\nEnter only one number from 0-9:");
             strPosY = input.next();
         } int posY = Integer.parseInt(strPosY);
+
+        return posX * 10 + posY;
+
+
     }
 }
