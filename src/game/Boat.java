@@ -3,21 +3,26 @@ package game;
 public class Boat {
     private int size;
     // Should be char for the type
-    private char abbr;
+    private char type;
     // Like C1 || B2 || P3  (Carrier #1, Battleship #2, Patrol-Boat #3
     private String name = new String();
     private boolean destroyed = false;
     private int position[];
+    private int hits[];
     private boolean posSet = false;
 
 
     public Boat() {}
     
-    public Boat setBoat(int size, char abbr, String name) {
+    public Boat setBoat(int size, char type, String name) {
         this.size = size;
-        this.abbr = abbr;
+        this.type = type;
         this.name = name;
         return this;
+    }
+    
+    public char getType() {
+    	return this.type;
     }
     
     public boolean isSunk() {
@@ -26,12 +31,12 @@ public class Boat {
     public boolean hit(int position) {
         int sum = 0;
         boolean hit = false;
-        for (int i = 0; i < this.position.length; i++) {
-            if ( this.position[i] == position) {
-                this.position[i] = 0;
+        for (int i = 0; i < this.hits.length; i++) {
+            if ( this.hits[i] == position) {
+                this.hits[i] = 0;
                 hit = true;
             }
-            sum += this.position[i];
+            sum += this.hits[i];
             //System.out.println(this.position[i]);
         }
         //System.out.println(sum);
@@ -50,15 +55,21 @@ public class Boat {
             throw new Exception("ship is allready placed");
         } else {
             this.position = new int[this.size];
+            this.hits  = new int[this.size];
             
             for (int i = 0; i < this.size; i++) {
                 this.position[i] = position + Math.max(i,(10*align*i));
-                System.out.println(this.position.length);
+                this.hits[i] =  this.position[i];
+                System.out.println(this.position);
               }
             this.posSet = true;
-            
             return this.position;
         }
+     
+    }
+    public int[] getPosition() {
+
+    	return this.position;
     }
     
     

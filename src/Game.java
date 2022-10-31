@@ -29,7 +29,7 @@ public class Game {
         // Gameloop
         do {
             fight();
-        } while (~player1.fleet.isEmpty() && ~player2.fleet.isEmpty()); // TODO: Check whether fleet of one player is destroyed
+        } while (player1.fleet.isEmpty() && player2.fleet.isEmpty()); // TODO: Check whether fleet of one player is destroyed.
 
         // Game Over
         gameOver();
@@ -66,7 +66,7 @@ public class Game {
         player2.attack();
 
         // print Gameboard
-        printBoard();
+        //printBoard();
 
     }
 

@@ -4,16 +4,10 @@ public class Board {
     final private static int numRows = 10;
     final private static int numCols = 10;
     private static String[][] grid = new String[numRows][numCols];
-    private Fleet fleet;
-
     public Board(){
-        this.fleet = new Fleet();
     }
     public Board getBoard() {
         return this;
-    }
-    public Fleet getFleet() {
-        return this.fleet.getFleet();
     }
     
     public String[][] getGrid() {

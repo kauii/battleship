@@ -3,6 +3,7 @@ import java.util.Scanner;
 
 public class User extends Player {
     public User(Board boardUser,Board boardTarget){
+    	
     }
 
     public void attack() {

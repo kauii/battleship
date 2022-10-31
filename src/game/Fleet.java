@@ -28,4 +28,21 @@ public class Fleet {
         //this = fleet;
         return this;        
     }
+    public boolean isEmpty() {
+    	boolean fin = false;
+    	int ships = 0;
+    	for (int i = 0; i < this.boats.length; i++) {
+    		for (int j = 0; j < this.boats[j].length; j++) {
+    			if (!this.boats[i][j].isSunk()) {
+    				ships +=1;
+    			}
+    			
+    			if (ships==0) {
+    				fin = true;
+    			}
+    			
+    		}
+    	}
+        return fin;        
+    } 
 }
