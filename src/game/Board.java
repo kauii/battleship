@@ -3,7 +3,7 @@ package game;
 public class Board {
     final private static int numRows = 10;
     final private static int numCols = 10;
-    private static String[][] grid = new String[numRows][numCols];
+    private static final String[][] grid = new String[numRows][numCols];
     public Board(){
     }
     public Board getBoard() {
@@ -13,12 +13,12 @@ public class Board {
     public String[][] getGrid() {
         return this.grid;
     }
-    public String[][] setGrid(String type,int[] position) {
+    public String[][] setGrid(char type,int[] position) {
         for (int i = 0; i < position.length; i++) {
-            int x = Integer.parseInt(String.valueOf(position[i]).substring(0,1));
-            int y = Integer.parseInt(String.valueOf(position[i]).substring(1,2));
+            int x = position[i] / 10;
+            int y = position[i] % 10;
             //System.out.println("test: "+x+y + type);
-            this.grid[x][y] = type;
+            this.grid[x][y] = String.valueOf(type);
             //System.out.println(this.grid[x][y]);
           }
         return this.grid;
