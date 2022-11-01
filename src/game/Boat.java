@@ -5,7 +5,7 @@ public class Boat {
     // Should be char for the type
     private char type;
     // Like C1 || B2 || P3  (Carrier #1, Battleship #2, Patrol-Boat #3
-    //private String name = new String();
+    private String name = new String();
     private boolean destroyed = false;
     private int[] position;
     private int[] hits;
@@ -14,10 +14,10 @@ public class Boat {
 
     public Boat() {}
     
-    public Boat setBoat(int size, char type){ //, String name) {
+    public Boat setBoat(int size, char type, String name) {
         this.size = size;
         this.type = type;
-        //this.name = name;
+        this.name = name;
         return this;
     }
     
@@ -49,7 +49,7 @@ public class Boat {
         return this;
     }
     
-    // align: 0 =horizontal, 1= vertical && position: the leftest point||top point
+    // align: 0 =vertical, 1= horizontal && position: the leftest point||topest point
     public int[] setPosition(int align, int position) throws Exception {
         if (this.posSet) {
             throw new Exception("ship is already placed");
@@ -75,6 +75,6 @@ public class Boat {
     public int getSize() {
         return this.size;
     }
-    
+
     
 }
