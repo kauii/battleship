@@ -15,8 +15,8 @@ public class Board {
     }
     public void setGrid(char type, int[] position) {
         for (int i = 0; i < position.length; i++) {
-            int x = position[i] % 10;
-            int y = position[i] / 10;
+            int x = position[i] / 10;
+            int y = position[i] % 10;
             //System.out.println("test: "+x+y + type);
             grid[x][y] = String.valueOf(type);
             //System.out.println(this.grid[x][y]);
