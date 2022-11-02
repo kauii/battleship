@@ -60,33 +60,6 @@ public class User extends Player {
         board.setGrid(boat.getType(),boat.getPosition());
     }
 
-    private boolean validatePos(int align, int pos, int size) {
-      //check if out of board
-      if (align == 1) {
-          if (!(pos / 10 + size <= 9)) {
-              return false;
-          }
-      }
-      else {
-          if (!(pos % 10 + size <= 9)) {
-              return false;
-          }
-      }
 
-      String[][] grid = aBoardUser.getGrid();
-
-      //check collision
-      for (int i = 0; i < size; i++) {
-
-          if (align == 1) {
-              if (!(grid[pos / 10 + i][pos % 10] == null)){
-              return false;}
-          } else {
-              if (!(grid[pos / 10][pos % 10 + i] == null)){
-                  return false;}
-          }
-      }
-      return true;
-    }
 
 }
