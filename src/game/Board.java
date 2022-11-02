@@ -3,7 +3,7 @@ package game;
 public class Board {
     final private static int numRows = 10;
     final private static int numCols = 10;
-    private static final String[][] grid = new String[numRows][numCols];
+    public static String[][] grid = new String[numRows][numCols];
     public Board(){
     }
     public Board getBoard() {
@@ -11,24 +11,25 @@ public class Board {
     }
     
     public String[][] getGrid() {
-        return this.grid;
+        return grid;
     }
-    public String[][] setGrid(char type,int[] position) {
+    public void setGrid(char type, int[] position) {
         for (int i = 0; i < position.length; i++) {
-            int x = position[i] / 10;
-            int y = position[i] % 10;
+            int x = position[i] % 10;
+            int y = position[i] / 10;
             //System.out.println("test: "+x+y + type);
-            this.grid[x][y] = String.valueOf(type);
+            grid[x][y] = String.valueOf(type);
             //System.out.println(this.grid[x][y]);
           }
-        return this.grid;
     }
     
     public void printGrid(){
         //First section of Ocean Map
-        System.out.print("  |  ");
+        System.out.print(" ");
         for(int i = 0; i < numCols; i++)
-                System.out.print(i+"  |  ");
+                System.out.print(" " + (char)(i + 65 ));
+        System.out.println();
+        System.out.print(" +-+-+-+-+-+-+-+-+-+-+");
         System.out.println();
 
         //Middle section of Ocean Map
@@ -36,19 +37,30 @@ public class Board {
             for (int j = 0; j < grid[i].length; j++) {
                 //grid[i][j] = "| ";
                 if (j == 0)
-                    System.out.print(i + " |" + grid[i][j]+ " |" );
+                    if (grid[i][j] == null)
+                        System.out.print(i + "| |");
+                    else
+                        System.out.print(i + "|" + grid[i][j]+ "|" );
                 else if (j == grid[i].length - 1)
-                    System.out.print(grid[i][j] + "|" + i);
+                    if (grid[i][j] == null)
+                        System.out.print(" |" + i);
+                    else
+                        System.out.print(grid[i][j] + "|" + i);
                 else
-                    System.out.print(grid[i][j]+"|");
+                    if (grid[i][j] == null)
+                        System.out.print(" |");
+                    else
+                        System.out.print(grid[i][j]+"|");
             }
             System.out.println();
         }
 
         //Last section of Ocean Map
-        System.out.print("  |");
+        System.out.print(" +-+-+-+-+-+-+-+-+-+-+");
+        System.out.println();
+        System.out.print(" ");
         for(int i = 0; i < numCols; i++)
-            System.out.print(i+"|");
+            System.out.print(" " + (char)(i + 65));
         System.out.println();
     }
 }
