@@ -13,28 +13,27 @@ public class Boat {
     private boolean posSet = false;
 
 
-    public Boat() {}
-    
     public Boat setBoat(int size, char type, String name, String id) {
         this.size = size;
         this.type = type;
         this.name = name;
-        this.id=id;
+        this.id = id;
         return this;
     }
-    
+
     public char getType() {
-    	return this.type;
+        return this.type;
     }
-    
+
     public boolean isSunk() {
         return this.destroyed;
     }
+
     public boolean hit(int position) {
         int sum = 0;
         boolean hit = false;
         for (int i = 0; i < this.hits.length; i++) {
-            if ( this.hits[i] == position) {
+            if (this.hits[i] == position) {
                 this.hits[i] = 0;
                 hit = true;
             }
@@ -47,28 +46,30 @@ public class Boat {
         }
         return hit;
     }
+
     public Boat getBoat() {
         return this;
     }
-    
+
     // align: 0 =vertical, 1= horizontal && position: the leftest point||topest point
     public int[] setPosition(int align, int position) {
 
         this.position = new int[this.size];
-        this.hits  = new int[this.size];
-            
+        this.hits = new int[this.size];
+
         for (int i = 0; i < this.size; i++) {
-            this.position[i] = position + Math.max(i,(10*align*i));
-            this.hits[i] =  this.position[i];
+            this.position[i] = position + Math.max(i, (10 * align * i));
+            this.hits[i] = this.position[i];
             System.out.println(this.position[i]);
         }
         this.posSet = true;
         return this.position;
-     
+
     }
+
     public int[] getPosition() {
 
-    	return this.position;
+        return this.position;
     }
 
     public int getSize() {
@@ -79,9 +80,9 @@ public class Boat {
         return this.name;
     }
 
-    public String getId(){
+    public String getId() {
         return this.id;
     }
-    
-    
+
+
 }

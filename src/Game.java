@@ -7,13 +7,10 @@ public class Game {
     // Prototype Player
     Player player1;
     Player player2;
-    // Prototype Boards
-    Board boardUser;
-    Board boardComp;
-    Board boardUTarget;
-    Board boardCTarget;
+    Player user;
+
     // Create printer
-    GridPrint printer=new GridPrint();
+    GridPrint printer = new GridPrint();
 
     public Game() {
         int round = 1;
@@ -40,12 +37,6 @@ public class Game {
     }
 
     private void setupGame() {
-        // create board
-        boardUser = new Board();
-        boardComp = new Board();
-        boardUTarget = new Board();
-        boardCTarget=new Board();
-
         // set user as either player 1 or 2
         // create random boolean
         Random rand = new Random();
@@ -53,12 +44,14 @@ public class Game {
 
         if (r) {
             // if True: Player1 -> User; Player2 -> Computer
-            player1 = new User(boardUser, boardUTarget);
-            player2 = new Computer(boardComp);
+            player1 = new User();
+            user = player1;
+            player2 = new Computer();
         } else {
             // else: Player1 -> Computer; Player2 -> User
-            player1 = new Computer(boardComp);
-            player2 = new User(boardUser, boardUTarget);
+            player1 = new Computer();
+            player2 = new User();
+            user = player2;
         }
 
     }
@@ -81,12 +74,14 @@ public class Game {
 
         // Display Target board
         System.out.println("====== Target Board ======");
-        printer.printGrid(boardTarget);
+        String[][] tGrid = user.getTGrid();
+        printer.printGrid(tGrid);
         System.out.println();
 
         // Display User board
         System.out.println("====== User Board ======");
-        printer.printGrid(boardUser);
+        String[][] uGrid = user.getUGrid();
+        printer.printGrid(uGrid);
 
     }
 
