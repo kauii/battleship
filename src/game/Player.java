@@ -2,8 +2,6 @@ package game;
 
 public class Player {
     public Fleet fleet = new Fleet();
-    public Board aBoardUser = new Board();
-    public Board aBoardComp = new Board();
 
     int posX, posY;
     // set initial positions of boats on board
@@ -29,8 +27,6 @@ public class Player {
     }
 
 
-    public void validateMove(char x, int y) {
 
-    }
 
 }

@@ -76,5 +76,9 @@ public class Boat {
         return this.size;
     }
 
+    public String getName() {
+        return this.name;
+    }
+    
     
 }
