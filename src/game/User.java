@@ -24,6 +24,7 @@ public class User extends Player {
               } while (!validatePos(align, pos,fleet.boats[i][j].getSize()));
               position = fleet.boats[i][j].setPosition(align,pos);
               aBoardUser.setGrid(fleet.boats[i][j].getType(), position);
+              aBoardUser.printGrid();
           }
       }
 
@@ -68,14 +69,14 @@ public class User extends Player {
     private boolean validatePos(int align, int pos, int size) {
         //check if out of board
         if (align == 1) {
-            if (!(pos / 10 + size <= 9)) {
-                System.out.println("Invalid Input. Ship is outside of the grid.");
+            if (!(pos / 10 + size <= 10)) {
+                System.out.println("Invalid input. Ship is outside of the grid.");
                 return false;
             }
         }
         else {
-            if (!(pos % 10 + size <= 9)) {
-                System.out.println("Invalid Input. Ship is outside of the grid.");
+            if (!(pos % 10 + size <= 10)) {
+                System.out.println("Invalid input. Ship is outside of the grid.");
                 return false;
             }
         }
@@ -87,11 +88,11 @@ public class User extends Player {
 
             if (align == 1) {
                 if (!(grid[pos / 10 + i][pos % 10] == null)){
-                    System.out.println("Invalid Input. Another ship has already been placed on this position.");
+                    System.out.println("Invalid input. Another ship has already been placed on this position.");
                     return false;}
             } else {
                 if (!(grid[pos / 10][pos % 10 + i] == null)){
-                    System.out.println("Invalid Input. Another ship has already been placed on this position.");
+                    System.out.println("Invalid input. Another ship has already been placed on this position.");
                     return false;}
             }
         }

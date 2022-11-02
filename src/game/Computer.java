@@ -36,6 +36,7 @@ public class Computer extends Player{
                 } while (!validatePos(align, pos,fleet.boats[i][j].getSize()));
                 position = fleet.boats[i][j].setPosition(align,pos);
                 aBoardComp.setGrid(fleet.boats[i][j].getType(), position);
+                aBoardComp.printGrid(); //TODO: remove later for Computer
             }
         }
 
