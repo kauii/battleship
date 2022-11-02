@@ -10,11 +10,12 @@ public class Game {
     // Prototype Boards
     Board boardUser;
     Board boardComp;
-    Board boardTarget;
+    Board boardUTarget;
+    Board boardCTarget;
     // Create printer
     GridPrint printer=new GridPrint();
 
-    public Game() throws Exception {
+    public Game() {
         int round = 1;
 
         System.out.println("Starting new game...");
@@ -42,7 +43,8 @@ public class Game {
         // create board
         boardUser = new Board();
         boardComp = new Board();
-        boardTarget = new Board();
+        boardUTarget = new Board();
+        boardCTarget=new Board();
 
         // set user as either player 1 or 2
         // create random boolean
@@ -51,19 +53,19 @@ public class Game {
 
         if (r) {
             // if True: Player1 -> User; Player2 -> Computer
-            player1 = new User(boardUser,boardComp, boardTarget);
-            player2 = new Computer(boardComp,boardUser);
+            player1 = new User(boardUser, boardUTarget);
+            player2 = new Computer(boardComp);
         } else {
             // else: Player1 -> Computer; Player2 -> User
-            player1 = new Computer(boardComp,boardUser);
-            player2 = new User(boardUser,boardComp, boardTarget);
+            player1 = new Computer(boardComp);
+            player2 = new User(boardUser, boardUTarget);
         }
 
     }
 
     private void fight(int round) {
-        player1.attack();
-        player2.attack();
+        player1.attack(player2);
+        player2.attack(player1);
 
         // print Game board
         printBoard(round);

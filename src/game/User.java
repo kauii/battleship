@@ -5,10 +5,10 @@ public class User extends Player {
     Scanner input = new Scanner(System.in);
     // User creates fleet
 
-    Board aBoardUser;
-    Board aBoardTarget;
+    Board aBoardUser=new Board();
+    Board aBoardTarget=new Board();
 
-  public void initBoard() throws Exception {
+  public void initBoard(){
       int align;
       int pos;
       System.out.println("Deploy your ships!");
@@ -23,7 +23,7 @@ public class User extends Player {
                   pos = inputPos();
               } while (!validatePos(align, pos,fleet.boats[i][j].getSize()));
               position = fleet.boats[i][j].setPosition(align,pos);
-              aBoardUser.setGrid(fleet.boats[i][j].getType(), position);
+              aBoardUser.setGrid(fleet.boats[i][j].getId(), position);
               aBoardUser.printGrid();
           }
       }
@@ -37,7 +37,8 @@ public class User extends Player {
     }
 
     @Override
-    public void attack() {
+    public int uAttack() {
+      return 1;
     }
 
     private int inputPos() {
@@ -57,25 +58,20 @@ public class User extends Player {
             strPosY = input.next();
         } posY = Integer.parseInt(strPosY);
 
-        return posX * 10 + posY;
+        return posX + posY*10;
     }
 
-
-    @Override
-    public void hasSunk(Boat boat){
-        aBoardUser.setGrid(boat.getType(),boat.getPosition());
-    }
 
     private boolean validatePos(int align, int pos, int size) {
         //check if out of board
         if (align == 1) {
-            if (!(pos / 10 + size <= 10)) {
+            if (!(pos / 10 + size-1 <= 9)) {
                 System.out.println("Invalid input. Ship is outside of the grid.");
                 return false;
             }
         }
         else {
-            if (!(pos % 10 + size <= 10)) {
+            if (!(pos % 10 + size-1 <= 9)) {
                 System.out.println("Invalid input. Ship is outside of the grid.");
                 return false;
             }

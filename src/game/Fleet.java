@@ -8,16 +8,30 @@ public class Fleet {
     //Init Fleet
     public Fleet() {
         // boats[0] = carrier & boats[1] = Battleships & boats[2] = Submarines & boats[3] = PatrolBoats
-        this.boats[0][0] = new Boat().setBoat(6, 'C', "Carrier");
-        this.boats[1][0] = new Boat().setBoat(4, 'B', "Battleship (1)");
-        this.boats[1][1] = new Boat().setBoat(4, 'B', "Battleship (2)");
-        this.boats[2][0] = new Boat().setBoat(3, 'S', "Submarine (1)");
-        this.boats[2][1] = new Boat().setBoat(3, 'S', "Submarine (2)");
-        this.boats[2][2] = new Boat().setBoat(3, 'S', "Submarine (3)");
-        this.boats[3][0] = new Boat().setBoat(2, 'P', "Patrol Boat (1)");
-        this.boats[3][1] = new Boat().setBoat(2, 'P', "Patrol Boat (2)");
-        this.boats[3][2] = new Boat().setBoat(2, 'P', "Patrol Boat (3)");
-        this.boats[3][3] = new Boat().setBoat(2, 'P', "Patrol Boat (4)");
+        this.boats[0][0] = new Boat().setBoat(6, 'C', "Carrier", "C1");
+        this.boats[1][0] = new Boat().setBoat(4, 'B', "Battleship (1)","B1");
+        this.boats[1][1] = new Boat().setBoat(4, 'B', "Battleship (2)","B2");
+        this.boats[2][0] = new Boat().setBoat(3, 'S', "Submarine (1)","S1");
+        this.boats[2][1] = new Boat().setBoat(3, 'S', "Submarine (2)","S2");
+        this.boats[2][2] = new Boat().setBoat(3, 'S', "Submarine (3)","S3");
+        this.boats[3][0] = new Boat().setBoat(2, 'P', "Patrol Boat (1)","P1");
+        this.boats[3][1] = new Boat().setBoat(2, 'P', "Patrol Boat (2)","P2");
+        this.boats[3][2] = new Boat().setBoat(2, 'P', "Patrol Boat (3)","P3");
+        this.boats[3][3] = new Boat().setBoat(2, 'P', "Patrol Boat (4)","P4");
+    }
+
+    public Boat checkId(String id){
+        char c=id.charAt(0);
+        char d=id.charAt(1);
+        int i;
+        int j=d-48;
+        i = switch (c) {
+            case 'C' -> 0;
+            case 'B' -> 1;
+            case 'S' -> 2;
+            default -> 3;
+        };
+        return this.boats[i][j-1];
     }
     
     public Fleet getFleet() {

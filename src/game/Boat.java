@@ -5,6 +5,7 @@ public class Boat {
     // Should be char for the type
     private char type;
     // Like C1 || B2 || P3  (Carrier #1, Battleship #2, Patrol-Boat #3
+    private String id;
     private String name = new String();
     private boolean destroyed = false;
     private int[] position;
@@ -14,10 +15,11 @@ public class Boat {
 
     public Boat() {}
     
-    public Boat setBoat(int size, char type, String name) {
+    public Boat setBoat(int size, char type, String name, String id) {
         this.size = size;
         this.type = type;
         this.name = name;
+        this.id=id;
         return this;
     }
     
@@ -50,21 +52,18 @@ public class Boat {
     }
     
     // align: 0 =vertical, 1= horizontal && position: the leftest point||topest point
-    public int[] setPosition(int align, int position) throws Exception {
-        if (this.posSet) {
-            throw new Exception("ship is already placed");
-        } else {
-            this.position = new int[this.size];
-            this.hits  = new int[this.size];
+    public int[] setPosition(int align, int position) {
+
+        this.position = new int[this.size];
+        this.hits  = new int[this.size];
             
-            for (int i = 0; i < this.size; i++) {
-                this.position[i] = position + Math.max(i,(10*align*i));
-                this.hits[i] =  this.position[i];
-                System.out.println(this.position[i]);
-              }
-            this.posSet = true;
-            return this.position;
+        for (int i = 0; i < this.size; i++) {
+            this.position[i] = position + Math.max(i,(10*align*i));
+            this.hits[i] =  this.position[i];
+            System.out.println(this.position[i]);
         }
+        this.posSet = true;
+        return this.position;
      
     }
     public int[] getPosition() {
@@ -78,6 +77,10 @@ public class Boat {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getId(){
+        return this.id;
     }
     
     

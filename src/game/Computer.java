@@ -11,8 +11,9 @@ public class Computer extends Player{
     }
 
     @Override
-    public void attack() {
+    public int uAttack() {
         rndAttack();
+        return 1;
     }
 
     public void rndAttack() {
@@ -21,7 +22,7 @@ public class Computer extends Player{
     }
 
     @Override
-    public void initBoard() throws Exception {
+    public void initBoard() {
         System.out.println("Computer is deploying ships..");
         int align;
         int pos;
@@ -35,7 +36,7 @@ public class Computer extends Player{
                     pos = calculatePos(align, fleet.boats[i][j].getSize());
                 } while (!validatePos(align, pos,fleet.boats[i][j].getSize()));
                 position = fleet.boats[i][j].setPosition(align,pos);
-                aBoardComp.setGrid(fleet.boats[i][j].getType(), position);
+                aBoardComp.setGrid(fleet.boats[i][j].getId(), position);
                 aBoardComp.printGrid(); //TODO: remove later for Computer
             }
         }
