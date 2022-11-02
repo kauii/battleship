@@ -1,7 +1,4 @@
-import game.Board;
-import game.Computer;
-import game.Player;
-import game.User;
+import game.*;
 
 import java.util.Random;
 
@@ -14,8 +11,11 @@ public class Game {
     Board boardUser;
     Board boardComp;
     Board boardTarget;
+    // Create printer
+    GridPrint printer=new GridPrint();
 
-    public Game() {
+    public Game() throws Exception {
+        int round = 1;
 
         System.out.println("Starting new game...");
 
@@ -26,10 +26,11 @@ public class Game {
         player1.initBoard();
         player2.initBoard();
 
-        // Gameloop
+        // Game loop
         do {
-            fight();
-        } while (player1.fleet.isEmpty() && player2.fleet.isEmpty()); // TODO: Check whether fleet of one player is destroyed.
+            fight(round);
+            round++;
+        } while (player1.fleet.isEmpty() && player2.fleet.isEmpty());
 
         // Game Over
         gameOver();
@@ -50,42 +51,50 @@ public class Game {
 
         if (r) {
             // if True: Player1 -> User; Player2 -> Computer
-            player1 = new User(boardUser, boardTarget);
-            player2 = new Computer(boardComp);
+            player1 = new User(boardUser,boardComp, boardTarget);
+            player2 = new Computer(boardComp,boardUser);
         } else {
             // else: Player1 -> Computer; Player2 -> User
-            player1 = new Computer(boardComp);
-            player2 = new User(boardUser, boardTarget);
+            player1 = new Computer(boardComp,boardUser);
+            player2 = new User(boardUser,boardComp, boardTarget);
         }
 
     }
 
-    private void fight() {
-// hasHit(boolean true/false) checkAttack(int position) attack()
-        int i = player1.attack();
-        int j = player2.attack();
-        int x = player2.checkAttack(i);
-        if (x>0){
-            player1.hasHit(true);
-            if (player2.fleet.boats[x.substring(0,1)][x.substring(1,2)].isSunk()) {
-                player1.hassunk(player2.fleet.boats[x.substring(0,1)][x.substring(1,2)].getBoat());
-            }
-        }
+    private void fight(int round) {
+        player1.attack();
+        player2.attack();
 
-        player2.hasHit(player1.checkAttack(player2.attack()));
-
-
-        // print Gameboard
-        //printBoard();
+        // print Game board
+        printBoard(round);
 
     }
 
-    private void gameOver(){
+    private void printBoard(int round) {
+
+        // Clear screen / new round
+        System.out.println("\n\n\n");
+        System.out.println("============ Round " + round + " ============");
+        System.out.println();
+
+        // Display Target board
+        System.out.println("====== Target Board ======");
+        printer.printGrid(boardTarget);
+        System.out.println();
+
+        // Display User board
+        System.out.println("====== User Board ======");
+        printer.printGrid(boardUser);
+
+    }
+
+
+    private void gameOver() {
         Player winner;
-        if(player1.fleet.isEmpty()){    // TODO: Check if fleet of player1 is destroyed
-            winner=player2;
-        }else {
-            winner=player1;
+        if (player1.fleet.isEmpty()) {
+            winner = player2;
+        } else {
+            winner = player1;
         }
 
         // Game Over screen
@@ -93,7 +102,7 @@ public class Game {
         System.out.println("################################################");
 
         // Winner message
-        if(winner instanceof User){
+        if (winner instanceof User) {
             System.out.println("#############      You won!        #############");
         } else {
             System.out.println("#############      You lost!       #############");
