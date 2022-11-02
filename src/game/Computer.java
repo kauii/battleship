@@ -3,7 +3,6 @@ import java.util.Random;
 
 
 public class Computer extends Player{
-    public Board board;
     Random r = new Random();
 
     public Computer(Board pBoardUser, Board pBoardComputer){
@@ -15,8 +14,6 @@ public class Computer extends Player{
     public void attack() {
         rndAttack();
     }
-
-
 
     public void rndAttack() {
         char posX = (char)(r.nextInt(10) + 'A');
@@ -36,41 +33,11 @@ public class Computer extends Player{
                     pos = r.nextInt(0,99);
                 } while (!validatePos(align, pos,fleet.boats[i][j].getSize()));
                 position = fleet.boats[i][j].setPosition(align,pos);
-                aBoardUser.setGrid(fleet.boats[i][j].getType(), position);
+                aBoardComp.setGrid(fleet.boats[i][j].getType(), position);
             }
         }
 
     }
-
-    private boolean validatePos(int align, int pos, int size) {
-        //check if out of board
-        if (align == 1) {
-            if (!(pos / 10 + size <= 9)) {
-                return false;
-            }
-        }
-        else {
-            if (!(pos % 10 + size <= 9)) {
-                return false;
-            }
-        }
-
-        String[][] grid = aBoardUser.getGrid();
-
-        //check collision
-        for (int i = 0; i < size; i++) {
-
-            if (align == 1) {
-                if (!(grid[pos / 10 + i][pos % 10] == null)){
-                    return false;}
-            } else {
-                if (!(grid[pos / 10][pos % 10 + i] == null)){
-                    return false;}
-            }
-        }
-        return true;
-    }
-
 
     public void calculateMove() {
     }
