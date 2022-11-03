@@ -17,7 +17,7 @@ public class User extends Player {
             for (int j = 0; j <= i; j++) {
                 do {
                     System.out.println("Set your position for: " + fleet.boats[i][j].getName() + " | length: " + fleet.boats[i][j].getSize());
-                    System.out.println("Insert 0 for vertical / Insert 1 for horizontal");
+                    System.out.println("Insert 0 for horizontal / Insert 1 for vertical");
                     align = input.nextInt();
                     pos = inputPos();
                 } while (!validatePos(align, pos, fleet.boats[i][j].getSize()));
@@ -31,8 +31,9 @@ public class User extends Player {
     }
 
     @Override
-    public int uAttack() {
-        return 1;
+    public int getAttackPos() {
+        System.out.println("It's your turn.");
+        return inputPos();
     }
 
     private int inputPos() {
