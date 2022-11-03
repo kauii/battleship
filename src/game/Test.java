@@ -24,7 +24,6 @@ public class Test {
         f.boats[0][0].hit(14);
         f.boats[0][0].hit(15);
 
-        b.printGrid();
         if (b.getGrid()[1][6] != null) {
             int pos[] = new int[] {16};
             b.setGrid("X",pos);
@@ -46,7 +45,6 @@ public class Test {
         //f.boats[0][0].hit(14);
         //f.boats[0][0].hit(15);
 
-        b.printGrid();
         System.out.println(f.boats[0][0].isSunk());
         System.out.println(f.boats[0][0].hit(16));
         System.out.println(f.boats[0][0].isSunk());

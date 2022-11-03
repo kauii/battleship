@@ -17,8 +17,13 @@ public class User extends Player {
             for (int j = 0; j <= i; j++) {
                 do {
                     System.out.println("Set your position for: " + fleet.boats[i][j].getName() + " | length: " + fleet.boats[i][j].getSize());
-                    System.out.println("Insert 0 for horizontal / Insert 1 for vertical");
-                    align = input.nextInt();
+                    System.out.println("Insert 0 for horizontal / Insert 1 for vertical:");
+                    String strAlign = input.next();
+                    while (!strAlign.matches("[0-1]+")) {
+                        System.out.println("Invalid input. Insert 0 for horizontal / Insert 1 for vertical:");
+                        strAlign = input.next();
+                    }
+                    align = Integer.parseInt(strAlign);
                     pos = inputPos();
                 } while (!validatePos(align, pos, fleet.boats[i][j].getSize()));
                 position = fleet.boats[i][j].setPosition(align, pos);

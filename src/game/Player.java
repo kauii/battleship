@@ -3,8 +3,8 @@ package game;
 import java.util.Objects;
 
 public class Player {
-    Board ownBoard = new Board();
-    Board targetBoard = new Board();
+    public Board ownBoard = new Board();
+    public Board targetBoard = new Board();
 
 
     public Fleet fleet = new Fleet();
@@ -16,8 +16,13 @@ public class Player {
     }
 
     public void attack(Player opponent) {
+        int target;
         // find attack coordinates
-        int target = this.uAttack();
+        do{
+            target = getAttackPos();
+
+        }while(!Objects.equals(this.getTGrid()[posY][posX], null ));
+
         // Opponent checks if hit
         boolean hit = opponent.checkAttack(target);
         int[] t = {target};
@@ -42,25 +47,24 @@ public class Player {
             // insert O on target board
             targetBoard.setGrid("O", t);
         }
-
-
+        opponent.hitBoat(target);
     }
 
-    public int uAttack() {
+    public int getAttackPos() {
         // find target position
         // input validation: check if already hit
-        return 12;
+        return posX + posY * 10;
 
     }
 
     public boolean checkAttack(int pos) {
+        System.out.println(pos + " = int pos; bei checkAttack(int pos)");
         // opponent board
         String[][] grid = ownBoard.getGrid();
         int[] p = {pos};
         // check if hit
         // ownBoard[pos/10][pos%10] != null
         if (grid[pos / 10][pos % 10] == null) {
-            ownBoard.setGrid("O", p);
             return false;
         }
 
@@ -72,22 +76,30 @@ public class Player {
         // else: insert O on own board
         //      return false
         String id = grid[pos / 10][pos % 10];
+        System.out.println(id + " = id");
 
         // fleet.checkId -> boat
         Boat boat = this.fleet.checkId(id);
         boat.hit(pos);
-
-        // adapt own board
-        ownBoard.setGrid("X", p);
-
-
         return true;
+    }
+
+    public void hitBoat(int pos){
+        String[][] grid=ownBoard.getGrid();
+        int[] p={pos};
+        if (grid[pos / 10][pos % 10] == null) {
+            ownBoard.setGrid("O",p);
+        } else{
+            ownBoard.setGrid("X",p);
+        }
+
     }
 
     public String isDestroyed(int pos) {
         // OPPONENT
         String[][] grid = ownBoard.getGrid();
         String id = grid[pos / 10][pos % 10];
+        System.out.println("id = " + id);
 
         // fleet.checkId -> boat
         Boat boat = this.fleet.checkId(id);
@@ -112,5 +124,10 @@ public class Player {
         return ownBoard.getGrid();
     }
 
+    public String[][] copyBoard(Player opponent) {
+        String[][] tGrid = targetBoard.getGrid();
+        tGrid = opponent.ownBoard.getGrid();
+        return tGrid;
+    }
 
 }

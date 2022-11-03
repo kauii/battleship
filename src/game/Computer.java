@@ -1,21 +1,61 @@
 package game;
 
+import java.util.Objects;
 import java.util.Random;
 
 
 public class Computer extends Player {
     Random r = new Random();
     GridPrint printer = new GridPrint();
+    boolean hit = false;
+    int lastAttack = -1;
+    int nextAttack;
 
     @Override
-    public int uAttack() {
-        rndAttack();
-        return 1;
+    public int getAttackPos() {
+        return rndAttack();
+    }
+    public int AIgetAttackPos() {
+
+        if (lastAttack == -1) {         // first attack
+            int randomPos = rndAttack();
+            lastAttack = randomPos;
+            return randomPos;
+        }
+
+        if (checkAttack(lastAttack)) { // check if last attack was a hit
+            hit = true;
+        }
+
+        if (hit) {
+            int[] nextMoves = calculateMove(lastAttack);  // returns all possible moves from the hit position
+            int rnd = r.nextInt(nextMoves.length);
+            int nextMove = nextMoves[rnd - 1]; // picks random nextMove from nextMoves array
+            nextMoves =  removeElement(nextMoves, rnd); // removes picked random move from list
+
+            if (checkAttack(nextMove)) { // check if the next calculated attack would be a hit.
+                if (Math.abs(lastAttack - nextAttack) == 1) { // ship is horizontal, --> next moves are +- 1
+                    return 0; //TODO
+                } else {  //ship is vertical, --> next moves are +-10
+                    return 1; //TODO
+                }
+            }
+
+            // else next "nextMove" from nextMoves array
+
+            return nextAttack;
+        }
+
+        // else pick random attackPos
+        int randomPos = rndAttack();
+        lastAttack = randomPos;
+        return randomPos;
     }
 
-    public void rndAttack() {
-        char posX = (char) (r.nextInt(10) + 'A');
-        int posY = r.nextInt(0, 10);
+    public int rndAttack() {
+        posX = r.nextInt(0,10);
+        posY = r.nextInt(0, 10);
+        return posX + posY * 10;
     }
 
     @Override
@@ -27,17 +67,15 @@ public class Computer extends Player {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j <= i; j++) {
                 do {
-                    System.out.println(fleet.boats[i][j].getType());
                     align = r.nextInt(0, 2);
-                    System.out.println("align is: " + align); // TODO:remove later for Computer
                     pos = calculatePos(align, fleet.boats[i][j].getSize());
                 } while (!validatePos(align, pos, fleet.boats[i][j].getSize()));
                 position = fleet.boats[i][j].setPosition(align, pos);
                 ownBoard.setGrid(fleet.boats[i][j].getId(), position);
                 String[][] grid = ownBoard.getGrid();
-                printer.printGrid(grid); //TODO: remove later for Computer
             }
         }
+        printer.printGrid(ownBoard.getGrid()); //CHEAT
 
     }
 
@@ -49,23 +87,51 @@ public class Computer extends Player {
             posX = r.nextInt(0, 11 - size);
             posY = r.nextInt(0, 10);
         }
-        System.out.println(posX + "," + posY); //TODO:remove later for Computer
         return posX * 10 + posY;
     }
 
-    public void calculateMove() {
+    public int[] calculateMove(int hitPos) {
+        posX = hitPos % 10;
+        posY = hitPos / 10;
+        int[] nextMoves = {(hitPos - 1), (hitPos + 1), (hitPos - 10), (hitPos + 10)};
+
+        if (posX == 9) {
+            nextMoves = removeElement(nextMoves, 1);         // case y9
+            if (posY == 0) {
+                nextMoves = removeElement(nextMoves, 1);     // corner case 09
+            }
+            if (posY == 9) {
+                nextMoves = removeElement(nextMoves, 2);    // corner case 99
+            }
+        }
+
+        if (posX == 0) {
+            nextMoves = removeElement(nextMoves, 0);       // case y0
+            if (posY == 0) {
+                nextMoves = removeElement(nextMoves, 1);   // corner case 00
+            }
+            if (posY == 9) {
+                nextMoves = removeElement(nextMoves, 2);   // corner case 90
+            }
+        }
+
+        if (posY == 0 && posX != 0 && posX != 9) {
+            nextMoves = removeElement(nextMoves, 2);      // case 0x
+        }
+        if (posY == 9 && posX != 0 && posX != 9) {
+            nextMoves = removeElement(nextMoves, 3);     // case 9x
+        }
+        return nextMoves;
     }
 
     private boolean validatePos(int align, int pos, int size) {
         //check if out of board
         if (align == 1) {
             if (!(pos / 10 + size <= 10)) {
-                System.out.println("Invalid input. Ship is outside of the grid.");   // TODO:remove later for Computer
                 return false;
             }
         } else {
             if (!(pos % 10 + size <= 10)) {
-                System.out.println("Invalid input. Ship is outside of the grid."); // TODO:remove later for Computer
                 return false;
             }
         }
@@ -77,17 +143,34 @@ public class Computer extends Player {
 
             if (align == 1) {
                 if (!(grid[pos / 10 + i][pos % 10] == null)) {
-                    System.out.println("Invalid input. Another ship has already been placed on this position."); // TODO:remove later for Computer
                     return false;
                 }
             } else {
                 if (!(grid[pos / 10][pos % 10 + i] == null)) {
-                    System.out.println("Invalid input. Another ship has already been placed on this position."); // TODO:remove later for Computer
                     return false;
                 }
             }
         }
         return true;
     }
+
+    public static int[] removeElement(int[] arr, int index) {
+        if (arr == null || index < 0 || index >= arr.length) {
+            return arr;
+        }
+
+        int[] anotherArray = new int[arr.length - 1];
+
+        for (int i = 0, k = 0; i < arr.length; i++) {
+            if (i == index) {
+                continue;
+            }
+
+            anotherArray[k++] = arr[i];
+        }
+
+        return anotherArray;
+    }
+
 
 }

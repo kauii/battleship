@@ -60,7 +60,6 @@ public class Boat {
         for (int i = 0; i < this.size; i++) {
             this.position[i] = position + Math.max(i, (10 * align * i));
             this.hits[i] = this.position[i];
-            System.out.println(this.position[i]);
         }
         this.posSet = true;
         return this.position;

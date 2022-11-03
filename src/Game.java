@@ -8,6 +8,7 @@ public class Game {
     Player player1;
     Player player2;
     Player user;
+    Player computer;
 
     // Create printer
     GridPrint printer = new GridPrint();
@@ -24,11 +25,20 @@ public class Game {
         player1.initBoard();
         player2.initBoard();
 
+        System.out.println("Choosing a random starting player...");
+        if (user == player1) {
+            System.out.println("You start!");
+        } else {
+            System.out.println("The computer starts.");
+        }
+
+
+
         // Game loop
         do {
             fight(round);
             round++;
-        } while (player1.fleet.isEmpty() && player2.fleet.isEmpty());
+        } while (!player1.fleet.isEmpty() && !player2.fleet.isEmpty());
 
         // Game Over
         gameOver();
@@ -95,19 +105,21 @@ public class Game {
         }
 
         // Game Over screen
-        System.out.println("################################################");
-        System.out.println("################################################");
+        System.out.println("#######################");
+        System.out.println("#######################");
 
         // Winner message
         if (winner instanceof User) {
-            System.out.println("#############      You won!        #############");
+            System.out.println("###### You won!! ######");
+            System.out.println("#######################");
         } else {
-            System.out.println("#############      You lost!       #############");
+            System.out.println("###### You lost. ######");
+            System.out.println("#######################");
         }
-        System.out.println("################################################");
-        System.out.println("################################################");
-        System.out.println("#############  Thanks for playing  #############");
-        System.out.println("################################################");
+        System.out.println("#######################");
+        System.out.println("#######################");
+        System.out.println("# Thanks for playing! #");
+        System.out.println("#######################");
 
     }
 
