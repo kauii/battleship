@@ -121,6 +121,15 @@ public class Game {
         System.out.println("# Thanks for playing! #");
         System.out.println("#######################");
 
+        // Show opponent board if lost
+        if(winner instanceof Computer){
+            String[][] uGrid=winner.getUGrid();
+            System.out.println();
+            System.out.println("#### Opponent Board ###");
+            printer.printGrid(uGrid);
+            System.out.println("#######################");
+        }
+
     }
 
 
