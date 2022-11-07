@@ -20,6 +20,8 @@ public class Game {
         // create board & players
         setupGame();
 
+        printer.printBoard(user, 0);
+
         // set initial boat positions
         player1.initBoard();
         player2.initBoard();
@@ -66,30 +68,9 @@ public class Game {
         player2.attack(player1);
 
         // print Game board
-        printBoard(round);
+        printer.printBoard(user, round);
 
     }
-
-    private void printBoard(int round) {
-
-        // Clear screen / new round
-        System.out.println("\n\n\n");
-        System.out.println("============ Round " + round + " ============");
-        System.out.println();
-
-        // Display Target board
-        System.out.println("====== Target Board ======");
-        String[][] tGrid = user.getTGrid();
-        printer.printGrid(tGrid);
-        System.out.println();
-
-        // Display User board
-        System.out.println("====== User Board ======");
-        String[][] uGrid = user.getUGrid();
-        printer.printGrid(uGrid);
-
-    }
-
 
     private void gameOver() {
         Player winner;
@@ -98,32 +79,7 @@ public class Game {
         } else {
             winner = player1;
         }
-
-        // Game Over screen
-        System.out.println("#######################");
-        System.out.println("#######################");
-
-        // Winner message
-        if (winner instanceof User) {
-            System.out.println("###### You won!! ######");
-            System.out.println("#######################");
-        } else {
-            System.out.println("###### You lost. ######");
-            System.out.println("#######################");
-        }
-        System.out.println("#######################");
-        System.out.println("#######################");
-        System.out.println("# Thanks for playing! #");
-        System.out.println("#######################");
-
-        // Show opponent board if lost
-        if(winner instanceof Computer){
-            String[][] uGrid=winner.getUGrid();
-            System.out.println();
-            System.out.println("#### Opponent Board ###");
-            printer.printGrid(uGrid);
-            System.out.println("#######################");
-        }
+        printer.printGameOver(winner);
     }
 
 }
