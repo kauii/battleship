@@ -59,7 +59,7 @@ public class Player {
 
     }
 
-    public boolean checkAttack(int pos) {
+    private boolean checkAttack(int pos) {
         // opponent board
         String[][] grid = ownBoard.getGrid();
         // check if hit
@@ -76,7 +76,7 @@ public class Player {
         return true;
     }
 
-    public void hitBoat(int pos){
+    private void hitBoat(int pos){
         String[][] grid=ownBoard.getGrid();
         int[] p={pos};
         if (grid[pos / 10][pos % 10] == null) {
@@ -86,11 +86,10 @@ public class Player {
         }
     }
 
-    public String isDestroyed(int pos) {
+    private String isDestroyed(int pos) {
         // OPPONENT
         String[][] grid = ownBoard.getGrid();
         String id = grid[pos / 10][pos % 10];
-        System.out.println("id = " + id);
 
         // fleet.checkId -> boat
         Boat boat = this.fleet.checkId(id);
@@ -101,7 +100,7 @@ public class Player {
         return "x";
     }
 
-    public int[] getBoatPos(String id) {
+    private int[] getBoatPos(String id) {
         Boat boat = this.fleet.checkId(id);
         return boat.getPosition();
     }
