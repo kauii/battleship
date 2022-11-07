@@ -50,40 +50,6 @@ public class Computer extends Player {
         return posX * 10 + posY;
     }
 
-    public int[] calculateMove(int hitPos) {
-        posX = hitPos % 10;
-        posY = hitPos / 10;
-        int[] nextMoves = {(hitPos - 1), (hitPos + 1), (hitPos - 10), (hitPos + 10)};
-
-        if (posX == 9) {
-            nextMoves = removeElement(nextMoves, 1);         // case y9
-            if (posY == 0) {
-                nextMoves = removeElement(nextMoves, 1);     // corner case 09
-            }
-            if (posY == 9) {
-                nextMoves = removeElement(nextMoves, 2);    // corner case 99
-            }
-        }
-
-        if (posX == 0) {
-            nextMoves = removeElement(nextMoves, 0);       // case y0
-            if (posY == 0) {
-                nextMoves = removeElement(nextMoves, 1);   // corner case 00
-            }
-            if (posY == 9) {
-                nextMoves = removeElement(nextMoves, 2);   // corner case 90
-            }
-        }
-
-        if (posY == 0 && posX != 0 && posX != 9) {
-            nextMoves = removeElement(nextMoves, 2);      // case 0x
-        }
-        if (posY == 9 && posX != 0 && posX != 9) {
-            nextMoves = removeElement(nextMoves, 3);     // case 9x
-        }
-        return nextMoves;
-    }
-
     private boolean validatePos(int align, int pos, int size) {
         //check if out of board
         if (align == 1) {
@@ -113,24 +79,5 @@ public class Computer extends Player {
         }
         return true;
     }
-
-    public static int[] removeElement(int[] arr, int index) {
-        if (arr == null || index < 0 || index >= arr.length) {
-            return arr;
-        }
-
-        int[] anotherArray = new int[arr.length - 1];
-
-        for (int i = 0, k = 0; i < arr.length; i++) {
-            if (i == index) {
-                continue;
-            }
-
-            anotherArray[k++] = arr[i];
-        }
-
-        return anotherArray;
-    }
-
 
 }
