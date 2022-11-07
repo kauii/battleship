@@ -28,12 +28,14 @@ public class Player {
 
         // Adapt own target board
         if (hit) {
+            System.out.println("It's a hit!");
             String destroyed = opponent.isDestroyed(target);
             // hit
             // check if enemy ship destroyed
             if (!Objects.equals(destroyed, "x")) {
                 // destroyed
                 // insert on own board type
+                System.out.println("Ship is destroyed!!");
                 int[] boatPos = opponent.getBoatPos(destroyed);
                 targetBoard.setGrid(destroyed.substring(0, 1), boatPos);
 
@@ -44,6 +46,7 @@ public class Player {
         } else {
             // no hit
             // insert O on target board
+            System.out.println("It's a miss..");
             targetBoard.setGrid("O", t);
         }
         opponent.hitBoat(target);
@@ -57,25 +60,15 @@ public class Player {
     }
 
     public boolean checkAttack(int pos) {
-        System.out.println(pos + " = int pos; bei checkAttack(int pos)");
         // opponent board
         String[][] grid = ownBoard.getGrid();
-        int[] p = {pos};
         // check if hit
         // ownBoard[pos/10][pos%10] != null
         if (grid[pos / 10][pos % 10] == null) {
             return false;
         }
 
-        // if hit:
-        //      boat.hit(); -> boat saves hit
-        //      boat.isSunk();
-        //      save to own grid
-        //      return true
-        // else: insert O on own board
-        //      return false
         String id = grid[pos / 10][pos % 10];
-        System.out.println(id + " = id");
 
         // fleet.checkId -> boat
         Boat boat = this.fleet.checkId(id);

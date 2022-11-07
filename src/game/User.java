@@ -32,6 +32,7 @@ public class User extends Player {
                 printer.printGrid(grid);
             }
         }
+        System.out.println("All ships are deployed.");
     }
 
     @Override
