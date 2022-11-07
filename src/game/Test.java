@@ -50,4 +50,43 @@ public class Test {
         System.out.println(f.boats[0][0].isSunk());
 
     }
+    
+    
+    
+    public int AIgetAttackPos() {
+
+        if (lastAttack == -1) {         // first attack
+            int randomPos = rndAttack();
+            lastAttack = randomPos;
+            return randomPos;
+        }
+
+        if (checkAttack(lastAttack)) { // check if last attack was a hit
+            hit = true;
+        }
+
+        if (hit) {
+            int[] nextMoves = calculateMove(lastAttack);  // returns all possible moves from the hit position
+            int rnd = r.nextInt(nextMoves.length);
+            int nextMove = nextMoves[rnd - 1]; // picks random nextMove from nextMoves array
+            nextMoves =  removeElement(nextMoves, rnd); // removes picked random move from list
+
+            if (checkAttack(nextMove)) { // check if the next calculated attack would be a hit.
+                if (Math.abs(lastAttack - nextAttack) == 1) { // ship is horizontal, --> next moves are +- 1
+                    return 0; //TODO
+                } else {  //ship is vertical, --> next moves are +-10
+                    return 1; //TODO
+                }
+            }
+
+            // else next "nextMove" from nextMoves array
+
+            return nextAttack;
+        }
+
+        // else pick random attackPos
+        int randomPos = rndAttack();
+        lastAttack = randomPos;
+        return randomPos;
+    }
 }
