@@ -3,19 +3,15 @@ package game;
 public class Boat {
     private int size;
     // Should be char for the type
-    private char type;
     // Like C1 || B2 || P3  (Carrier #1, Battleship #2, Patrol-Boat #3
     private String id;
     private String name = "";
     private boolean destroyed = false;
     private int[] position;
     private int[] hits;
-    private boolean posSet = false;
 
-
-    public Boat setBoat(int size, char type, String name, String id) {
+    public Boat setBoat(int size, String name, String id) {
         this.size = size;
-        this.type = type;
         this.name = name;
         this.id = id;
         return this;
@@ -53,7 +49,7 @@ public class Boat {
             this.position[i] = position + Math.max(i, (10 * align * i));
             this.hits[i] = this.position[i];
         }
-        this.posSet = true;
+
         return this.position;
 
     }
