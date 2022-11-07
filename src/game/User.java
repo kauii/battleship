@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class User extends Player {
     Scanner input = new Scanner(System.in);
-    GridPrint printer = new GridPrint();
+    Printer printer = new Printer();
     // User creates fleet
 
     public void initBoard() {

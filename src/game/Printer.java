@@ -1,6 +1,6 @@
 package game;
 
-public class GridPrint {
+public class Printer {
 
     public void printGrid(String[][] grid) {
         char e;
@@ -80,8 +80,6 @@ public class GridPrint {
             printGrid(uGrid);
             System.out.println("#######################");
         }
-
-
     }
 
 }

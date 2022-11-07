@@ -10,7 +10,7 @@ public class Game {
     Player user;
 
     // Create printer
-    GridPrint printer = new GridPrint();
+    Printer printer = new Printer();
 
     public Game() {
         int round = 1;

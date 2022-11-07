@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Computer extends Player {
     Random r = new Random();
-    GridPrint printer = new GridPrint();
+    Printer printer = new Printer();
 
     @Override
     public int getAttackPos() {
