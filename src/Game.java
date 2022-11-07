@@ -8,7 +8,6 @@ public class Game {
     Player player1;
     Player player2;
     Player user;
-    Player computer;
 
     // Create printer
     GridPrint printer = new GridPrint();
@@ -32,8 +31,6 @@ public class Game {
             System.out.println("The computer starts.");
         }
 
-
-
         // Game loop
         do {
             fight(round);
@@ -42,8 +39,6 @@ public class Game {
 
         // Game Over
         gameOver();
-
-
     }
 
     private void setupGame() {
@@ -129,8 +124,6 @@ public class Game {
             printer.printGrid(uGrid);
             System.out.println("#######################");
         }
-
     }
-
 
 }

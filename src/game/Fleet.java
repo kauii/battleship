@@ -32,15 +32,6 @@ public class Fleet {
         return this.boats[i][j - 1];
     }
 
-    public Fleet getFleet() {
-        return this;
-    }
-
-    public Fleet setFleet(Fleet fleet) {
-        //this = fleet;
-        return this;
-    }
-
     public boolean isEmpty() {
         boolean fin = false;
         int ships = 0;
@@ -50,9 +41,6 @@ public class Fleet {
                     ships += 1;
                     System.out.println(ships);
                 }
-
-
-
             }
         }
         if (ships == 0) {
@@ -60,43 +48,5 @@ public class Fleet {
         }
         return fin;
     }
-
-    public boolean corrIsEmpty() {      // corrected isEmpty(), old isEmpty() goes through non-existing boats[i][j] which are null and lead to error (e.g. boats[0][3] = 3rd Carrier?)
-        boolean isEmpty = false;        // TODO: simplify it
-        int ships = 0;
-        for (int i = 0; i < boats.length; i++) {
-            if (i == 0) {
-                if (!this.boats[i][0].isSunk()) {
-                    ships += 1;
-                }
-            }
-            if (i == 1) {
-                for (int j = 0; j < 2; j++) {
-                    if (!this.boats[i][j].isSunk()) {
-                        ships += 1;
-                    }
-                }
-            }
-            if (i == 2) {
-                for (int j = 0; j < 3; j++) {
-                    if (!this.boats[i][j].isSunk()) {
-                        ships += 1;
-                    }
-                }
-            }
-            if (i==3) {
-                for (int j = 0; j < 4; j++) {
-                    if (!this.boats[i][j].isSunk()) {
-                        ships += 1;
-                    }
-                }
-            }
-
-        }
-        if (ships == 0) { isEmpty = true; }
-        return isEmpty;
-
-    }
-
 
 }

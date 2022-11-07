@@ -6,7 +6,7 @@ public class Boat {
     private char type;
     // Like C1 || B2 || P3  (Carrier #1, Battleship #2, Patrol-Boat #3
     private String id;
-    private String name = new String();
+    private String name = "";
     private boolean destroyed = false;
     private int[] position;
     private int[] hits;
@@ -19,10 +19,6 @@ public class Boat {
         this.name = name;
         this.id = id;
         return this;
-    }
-
-    public char getType() {
-        return this.type;
     }
 
     public boolean isSunk() {
@@ -47,11 +43,7 @@ public class Boat {
         return hit;
     }
 
-    public Boat getBoat() {
-        return this;
-    }
-
-    // align: 0 =vertical, 1= horizontal && position: the leftest point||topest point
+    // align: 0 = horizontal, 1 = vertical && position: the leftest point||top point
     public int[] setPosition(int align, int position) {
 
         this.position = new int[this.size];
@@ -67,7 +59,6 @@ public class Boat {
     }
 
     public int[] getPosition() {
-
         return this.position;
     }
 

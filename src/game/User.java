@@ -32,7 +32,6 @@ public class User extends Player {
                 printer.printGrid(grid);
             }
         }
-
     }
 
     @Override
@@ -97,6 +96,5 @@ public class User extends Player {
         }
         return true;
     }
-
 
 }

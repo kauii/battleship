@@ -6,7 +6,6 @@ public class Player {
     public Board ownBoard = new Board();
     public Board targetBoard = new Board();
 
-
     public Fleet fleet = new Fleet();
 
     int posX, posY;
@@ -92,7 +91,6 @@ public class Player {
         } else{
             ownBoard.setGrid("X",p);
         }
-
     }
 
     public String isDestroyed(int pos) {
@@ -115,19 +113,12 @@ public class Player {
         return boat.getPosition();
     }
 
-
     public String[][] getTGrid() {
         return targetBoard.getGrid();
     }
 
     public String[][] getUGrid() {
         return ownBoard.getGrid();
-    }
-
-    public String[][] copyBoard(Player opponent) {
-        String[][] tGrid = targetBoard.getGrid();
-        tGrid = opponent.ownBoard.getGrid();
-        return tGrid;
     }
 
 }

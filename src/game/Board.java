@@ -14,9 +14,9 @@ public class Board {
     }
 
     public void setGrid(String id, int[] position) {
-        for (int i = 0; i < position.length; i++) {
-            int x = position[i] / 10;
-            int y = position[i] % 10;
+        for (int j : position) {
+            int x = j / 10;
+            int y = j % 10;
             //System.out.println("test: "+x+y + type);
             grid[x][y] = id;
             //System.out.println(this.grid[x][y]);
