@@ -6,16 +6,16 @@ public class Fleet {
     //Init Fleet
     public Fleet() {
         // boats[0] = carrier & boats[1] = Battleships & boats[2] = Submarines & boats[3] = PatrolBoats
-        this.boats[0][0] = new Boat().setBoat(6, 'C', "Carrier", "C1");
-        this.boats[1][0] = new Boat().setBoat(4, 'B', "Battleship (1)", "B1");
-        this.boats[1][1] = new Boat().setBoat(4, 'B', "Battleship (2)", "B2");
-        this.boats[2][0] = new Boat().setBoat(3, 'S', "Submarine (1)", "S1");
-        this.boats[2][1] = new Boat().setBoat(3, 'S', "Submarine (2)", "S2");
-        this.boats[2][2] = new Boat().setBoat(3, 'S', "Submarine (3)", "S3");
-        this.boats[3][0] = new Boat().setBoat(2, 'P', "Patrol Boat (1)", "P1");
-        this.boats[3][1] = new Boat().setBoat(2, 'P', "Patrol Boat (2)", "P2");
-        this.boats[3][2] = new Boat().setBoat(2, 'P', "Patrol Boat (3)", "P3");
-        this.boats[3][3] = new Boat().setBoat(2, 'P', "Patrol Boat (4)", "P4");
+        this.boats[0][0] = new Boat().setBoat(6, "Carrier", "C1");
+        this.boats[1][0] = new Boat().setBoat(4, "Battleship (1)", "B1");
+        this.boats[1][1] = new Boat().setBoat(4, "Battleship (2)", "B2");
+        this.boats[2][0] = new Boat().setBoat(3, "Submarine (1)", "S1");
+        this.boats[2][1] = new Boat().setBoat(3, "Submarine (2)", "S2");
+        this.boats[2][2] = new Boat().setBoat(3, "Submarine (3)", "S3");
+        this.boats[3][0] = new Boat().setBoat(2, "Patrol Boat (1)", "P1");
+        this.boats[3][1] = new Boat().setBoat(2, "Patrol Boat (2)", "P2");
+        this.boats[3][2] = new Boat().setBoat(2, "Patrol Boat (3)", "P3");
+        this.boats[3][3] = new Boat().setBoat(2, "Patrol Boat (4)", "P4");
     }
 
     public Boat checkId(String id) {
@@ -39,7 +39,6 @@ public class Fleet {
             for (int j = 0; j <=i ; j++) {
                 if (!this.boats[i][j].isSunk()) {
                     ships += 1;
-                    System.out.println(ships);
                 }
             }
         }
