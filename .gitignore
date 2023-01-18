@@ -7,3 +7,4 @@ bin
 .idea
 battleship.iml
 pom.xml
+/target/
