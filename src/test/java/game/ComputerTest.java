@@ -3,8 +3,6 @@ package game;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class ComputerTest {
 
     Computer comp;
@@ -69,8 +67,6 @@ class ComputerTest {
     void attack() {
         Player opponent = new Player();
         comp.attack(opponent);
-        String[][] grid;
-        boolean ch = false;
 
         // Check if one position is hit on target board
         assert (checkGridHit(comp.getTGrid()));
@@ -94,9 +90,9 @@ class ComputerTest {
     }
 
     @Test
-    void gameLoop(){
-        player1=new Computer();
-        player2=new Computer();
+    void gameLoop() {
+        player1 = new Computer();
+        player2 = new Computer();
 
         // set initial boat positions
         player1.initBoard();
@@ -108,7 +104,7 @@ class ComputerTest {
             player2.attack(player1);
         } while (!player1.fleet.isEmpty() && !player2.fleet.isEmpty());
 
-        assert(player1.fleet.isEmpty()||player2.fleet.isEmpty());
+        assert (player1.fleet.isEmpty() || player2.fleet.isEmpty());
 
     }
 }
