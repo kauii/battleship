@@ -6,3 +6,4 @@ bin
 .project
 .idea
 battleship.iml
+pom.xml
